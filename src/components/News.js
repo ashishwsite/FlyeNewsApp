@@ -25,13 +25,15 @@ const News = (props) => {
     const updateNews = async () => {
         // console.log(" update new is call ")
         props.setProgress(3)
-        const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
+        // const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
         setLoading(true)
-        let data = await fetch(url);
+        // let data = await fetch(url);
         props.setProgress(30);
-        let artifa = await data.json()
+        // let artifa = await data.json()
+        let artifa=[]//  remove it when api is on 
         // Call if your api run fine ,and we have issue in future
-        if(artifa.status==='error' || artifa===null){
+        // if(artifa.status==='error' || artifa===null){
+            if(artifa.length<=1){
             // artifa.clear();
             artifa.length=0;
              artifa=[
@@ -331,6 +333,7 @@ const News = (props) => {
         <>
             {loading && <Spinner />}
                 <div className="container" >
+
                     <div className="row"> 
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>
