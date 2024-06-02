@@ -7,9 +7,8 @@ const News = (props) => {
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
     function modifies( str){
-        // console.log("length beffore remove ",str.length)
-     if(str.length!==null)  for(let i=0;i<str.length;i++){
-        if(str[i].title!==null && str[i].description !==null)  console.log("tile len",str[i].title.length, " des.leng ",str[i].description.length,str[i].description)
+      for(let i=0;i<str.length;i++){
+        if(str[i].title!==null && str[i].description !==null)  
             if (str[i] === null || str[i].title === null || str[i].description === null || str[i].title.length < 50 || str[i].description.length < 100) {
                 // console.log(i)
                 str.splice(i, 1);
@@ -24,42 +23,33 @@ const News = (props) => {
        }
     }
     const updateNews = async () => {
-        console.log(" update new is call ")
+        // console.log(" update new is call ")
         props.setProgress(3)
-       // const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
+        const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
         setLoading(true)
-        
-        // let data = await fetch(url);
-         props.setProgress(30);
-        // let artifa = await data.json()
+        let data = await fetch(url);
+        props.setProgress(30);
+        let artifa = await data.json()
         // Call if your api run fine ,and we have issue in future
-        // if(artifa.status==='error' || artifa===null){
-        //     var arr=[
-        //         {
-        //                      "source": {
-        //                      "id": "NewsApi- RestApi",
-        //                      "name": "Api-Key Expire"
-        //                      },
-        //                      "author": "NewsApi Try Later",
-        //                      "title": "Issue Well Fatching NewsApi Request",
-        //                      "description": "The user Api-Key is expire due to many request within 24 hour",
-        //                      "url": "https://newsapi.org/pricing",
-        //                      "urlToImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOzKKVgDxXDOzJ6e6EfinHGPGTOXLX1t4LswH_uRf1b_fgf8fminC2mdx70dbfH2bgDqw&usqp=CAU",
-        //                      "publishedAt": "",
-        //                      "content": "Boeings first attempt to fly its Starliner spacecraft with astronauts on board was scrubbed Saturday less than four minutes before it was to lift off. The delay was called by an automated computer sy… [+3178 chars]"
-        //                      }
-        //     ]
-            
-        //     props.setProgress(70);
-        //     setArticles(arr);
-        //     setLoading(false)
-        //     props.setProgress(100);
-        //     return;
-
-        // }
-       
-        //call as we know key is expire 
-       let artifa= [
+        if(artifa.status==='error' || artifa===null){
+            // artifa.clear();
+            artifa.length=0;
+             artifa=[
+                {
+                             "source": {
+                             "id": "NewsApi- RestApi",
+                             "name": "Api-Key Expire"
+                             },
+                             "author": "NewsApi Try Later",
+                             "title": "Issue Well Fatching NewsApi Request                           .",
+                             "description": "The user Api-Key is expire due to many request within 24 hour .The News Showing Currently is Not real time its is previous News.",
+                             "url": "https://newsapi.org/pricing",
+                             "urlToImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOzKKVgDxXDOzJ6e6EfinHGPGTOXLX1t4LswH_uRf1b_fgf8fminC2mdx70dbfH2bgDqw&usqp=CAU",
+                             "publishedAt": "",
+                             "content": "Boeings first attempt to fly its Starliner spacecraft with astronauts on board was scrubbed Saturday less than four minutes before it was to lift off. The delay was called by an automated computer sy… [+3178 chars]"
+                             }
+            ]
+         let storearr= [
             {
             "source": {
             "id": "the-washington-post",
@@ -321,11 +311,12 @@ const News = (props) => {
             "content": "SANTAN, AZ A Gila River police officer is dead and another is hurt, along with four other individuals after a shooting broke out early Saturday morning in the Gila River Indian Community.\r\nGila River… [+2372 chars]"
             }
             ]
+             artifa = artifa.concat(storearr);
+        }
         // console.log("before modcall",artifa.length);
         
         modifies(artifa);
-      // console.log(" after modcall",artifa.length)
-
+      
         props.setProgress(70);
         setArticles(artifa);
         setLoading(false)
