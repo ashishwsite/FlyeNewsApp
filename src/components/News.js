@@ -330,8 +330,7 @@ const News = (props) => {
     return (
         <>
             {loading && <Spinner />}
-                <div className="container" style={{marginTop:'20px'}}>
-                    <div style={{color:'white'}}>Top  {props.category===`general`? `Trading`:props.category} Headline </div>
+                <div className="container" >
                     <div className="row"> 
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>

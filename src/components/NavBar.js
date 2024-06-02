@@ -1,15 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./NavbarSty.css";
 import logo from './images/newre.png'
 
 const NavBar = () => {
-  const [title, settitle] = useState("Home");
+  const [title, setTitle] = useState("Home");
+  const [disStatus,setdis]=useState('flex')
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth <= 520) {
+        setTitle('NewReader');
+        setdis('none')
+      } else {
+        setTitle('Home');
+        setdis('flex')
+         // Set a default title for larger screens (optional)
+      }
+    };
 
+    // Attach the resize event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function: Remove the event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <>
-       <div style={{ display:'flex',justifyContent:"center",backgroundColor:'black'}}>
-       <span style={{ display:'flex',color:'rgb(204, 207, 210)',fontSize:'36px', letterSpacing:'3px',fontStretch:"ultra-condensed" , fontWeight:'600'}}>NewsReader<p style={{marginTop:'16px',letterSpacing:'2px'}}>-Connect Worldwide</p></span>
+       {/* <div style={{
+    display:'flex',
+    justifycontent:"center", alignItems:'center',
+    backgroundColor:'black'}}> */}
+    <div style={{display:`${disStatus}`, justifyContent:'center'}}>
+    <span style={{color:'rgb(204, 207, 210)',fontSize:'36px', letterSpacing:'3px',fontStretch:"ultra-condensed" , fontWeight:'600'}}>NewsReader<span style={{marginTop:'1px',letterSpacing:'2px', fontStyle:'revert'}}>-Connect Worldwide</span></span>
+       {/* <span style={{ display:'flex',color:'rgb(204, 207, 210)',fontSize:'36px', letterSpacing:'3px',fontStretch:"ultra-condensed" , fontWeight:'600'}}>NewsReader<p style={{marginTop:'16px',letterSpacing:'2px'}}>-Connect Worldwide</p></span> */}
       </div>
       <nav className="navbar  navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
