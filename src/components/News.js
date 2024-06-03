@@ -12,13 +12,19 @@ const News = (props) => {
         const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
         setLoading(true)
         let data = await fetch(url);
+        let artifa;
          props.setProgress(30);
+        //  console.log("data",data)
         let parsedData = await data.json()
+        if(parsedData.status==="ok"){
+            console.log("parse data is correct ")
+             artifa=parsedData.articles;
+        }
+        
         props.setProgress(70);
-        // artifa from url response 
-        let artifa=parsedData.articles;
+        console.log("artifa ",artifa);
         // first artifa  used when  response is fail
-        if(artifa.status==='error' || !artifa ){   
+        if(!artifa ){   
          let arr= [
             {
             "source": {
@@ -287,11 +293,7 @@ const News = (props) => {
             setArticles(artifa);
         }
         setLoading(false)
-        props.setProgress(100);
-       
-        // console.log(" after modcall",artifa.length)
-
-       
+        props.setProgress(100); 
     }
     useEffect(() => {
         updateNews();
