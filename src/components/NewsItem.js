@@ -3,9 +3,8 @@ import './NewitemSty.css'
 
 const NewsItem = (props)=> {
         let { title, description, imageUrl, newsUrl, author, date, source } = props;
-           title=title.substr(0,50);
-           description=description.substr(0,150);
-        //    console.log(title.length)
+          if(title.length>51) title=title.substr(0,50);
+          if(description.length>150)  description=description.substr(0,150);
         return (
             <div className="my-3" >
                 <div className="card" style={{backgroundColor:'gray'}}>
