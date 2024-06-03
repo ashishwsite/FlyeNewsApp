@@ -444,7 +444,6 @@ const News = (props) => {
         <>
             {loading && <Spinner />}
                 <div className="container" >
-
                     <div className="row"> 
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>
