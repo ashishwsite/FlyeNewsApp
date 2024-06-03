@@ -7,15 +7,16 @@ const News = (props) => {
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
     function modifies( str){
-      for(let i=0;i<str.length;i++){
+    if(str) 
+         {for(let i=0;i<str.length;i++){
         if(str[i].title!==null && str[i].description !==null)  
             if (str[i] === null || str[i].title === null || str[i].description === null || str[i].title.length < 50 || str[i].description.length < 100) {
                 // console.log(i)
                 str.splice(i, 1);
                 i--;
             }
-       }
-      if(str.length!==null) if(str.length%3!==0){
+       }}
+      if(str) if(str.length%3!==0){
         var re=str.length%3;
         for(var i=0;i<re;i++){
             str.splice(i, 1);
