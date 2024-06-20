@@ -1,5 +1,5 @@
-{
-  "name": "newsbackend",
+
+  {"name": "newsbackend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -16,4 +16,4 @@
     "path": "^0.12.7",
     "react-scripts": "^5.0.1"
   }
-}
+  }
