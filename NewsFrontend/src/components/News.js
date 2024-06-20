@@ -6,24 +6,51 @@ import Foote from './Foote';
 const News = (props) => {
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
+    var url="http://localhost:8000/"
+    let category=props.category;
     const updateNews = async () => {
         // console.log(" update new is call ")
         props.setProgress(3);
-        const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
+        // console.log("printing category",category);
+        if(category==="general"){
+            // console.log(" if general")
+            url=url+"general"
+        }
+        else if(props.category==='entertainment'){
+            url="http://localhost:8000/entertainment"
+        }
+        else if(props.category==='business'){
+            url="http://localhost:8000/business"
+        }
+        else if(props.category==='health'){
+            url="http://localhost:8000/health"
+        }
+        else if(props.category==='technology'){
+            url="http://localhost:8000/technology"
+        }
+        else if(props.category==='science'){
+            url="http://localhost:8000/science"
+        }
+        else if(props.category==='sport'){
+            url="http://localhost:8000/sport"
+        }
+        // const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
         setLoading(true)
         let data = await fetch(url);
         let artifa;
          props.setProgress(30);
-        //  console.log("data",data)
+       
         let parsedData = await data.json()
+        // console.log("this parse data :" ,parsedData)
         if(parsedData.status==="ok"){
-            console.log("parse data is correct ")
+            // console.log("parse data is correct ")
              artifa=parsedData.articles;
         }
         
         props.setProgress(70);
-        console.log("artifa ",artifa);
+        // console.log("artifa ",artifa);
         // first artifa  used when  response is fail
+        // !artifa=read as not data 
         if(!artifa ){   
          let arr= [
             {
@@ -297,7 +324,7 @@ const News = (props) => {
     }
     useEffect(() => {
         updateNews();
-    }, [])
+    }, [category])
     
     return (
         <>
