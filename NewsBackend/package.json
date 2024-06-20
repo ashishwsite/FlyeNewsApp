@@ -1,19 +1,20 @@
 {
   "name": "newsbackend",
   "version": "1.0.0",
-  "description": "This Backend to handle newsApi request and serve on frontend",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js",
-    "start": "nodemon index.js"
-  },
-  "author": "Ramashish",
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+},
+
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
-    "cores": "^0.8.5",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "nodemon": "^3.1.3",
-    "react-scripts": "^5.0.1",
-  },
+    "express": "^4.19.2"
+  }
 }
