@@ -1,7 +1,10 @@
 const express=require("express")
+const cors=require('cors')
 const app=express()
+const path = require("path");
 const port=8000;
 app.use(cors())
+app.use(express.json())
 app.get('/',async(req,res)=>{
    try{
     const url = `https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=a0507de64f0c463d9dc01d4c13245062`
