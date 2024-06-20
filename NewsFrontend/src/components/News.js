@@ -11,7 +11,6 @@ const News = (props) => {
     const updateNews = async () => {
         // console.log(" update new is call ")
         props.setProgress(3);
-        // console.log("printing category",category);
         if(category==="general"){
             // console.log(" if general")
             url=url+"general"
