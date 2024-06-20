@@ -6,7 +6,7 @@ import Foote from './Foote';
 const News = (props) => {
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
-    var url="http://localhost:8000/"
+    var url="https://flye-news-app.vercel.app/"
     let category=props.category;
     const updateNews = async () => {
         // console.log(" update new is call ")
@@ -16,22 +16,22 @@ const News = (props) => {
             url=url+"general"
         }
         else if(props.category==='entertainment'){
-            url="http://localhost:8000/entertainment"
+            url="https://flye-news-app.vercel.app/entertainment"
         }
         else if(props.category==='business'){
-            url="http://localhost:8000/business"
+            url="https://flye-news-app.vercel.app/business"
         }
         else if(props.category==='health'){
-            url="http://localhost:8000/health"
+            url="https://flye-news-app.vercel.app/health"
         }
         else if(props.category==='technology'){
-            url="http://localhost:8000/technology"
+            url="https://flye-news-app.vercel.app/technology"
         }
         else if(props.category==='science'){
-            url="http://localhost:8000/science"
+            url="https://flye-news-app.vercel.app/science"
         }
         else if(props.category==='sport'){
-            url="http://localhost:8000/sport"
+            url="https://flye-news-app.vercel.app/sport"
         }
         // const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
         setLoading(true)
