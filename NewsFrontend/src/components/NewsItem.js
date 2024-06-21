@@ -6,7 +6,7 @@ const NewsItem = (props)=> {
           if(title.length>51) title=title.substr(0,50);
           if(description.length>150)  description=description.substr(0,150);
         return (
-            <div className="my-3" >
+            <div className="my-2" >
                 <div className="card" style={{backgroundColor:'gray'}}>
                     <div style={{// this is showing source div on image 
                         display: 'flex',
@@ -20,12 +20,14 @@ const NewsItem = (props)=> {
                     {/* image shown  */}
                     <img style={{height:'250px',padding:'3px'}} src={!imageUrl ? "https://fdn.gsmarena.com/imgroot/news/21/08/xiaomi-smart-home-india-annoucnements/-476x249w4/gsmarena_00.jpg" : imageUrl} className="img img-fluid" alt="..." />
                     <div className="card-body" style={{height:'24em'}}>
-                        <div style={{height:'6em'}}><h4 className="card-title">{title}  </h4></div>
-        
-                        <p className="card-text">{description}</p>
-                        <p> {new Date(date).toGMTString()}</p>
-                        <p className="card-text"><small className="text">By {!author ? "Unknown" : author}</small></p>
+                        <div style={{height:'6em'}}><h4 style={{fontSize:'1em'}} className="card-title">{title}  </h4></div>
+                        <div style={{marginBottom:'1px'}}>
+                        <p className="card-text" style={{fontSize:'.8em'}}>{description}</p>
+                        <p style={{fontSize:'.7em'}}> {new Date(date).toGMTString()}</p>
+                        <p className="card-text"><small style={{fontSize:'.8em'}} className="text">By {!author ? "Unknown" : author}</small></p>
                         <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a>
+                        </div>
+                       
                     </div>
                 </div>
             </div>

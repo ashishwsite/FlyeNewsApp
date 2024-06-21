@@ -5,33 +5,40 @@ import Spinner from './Spinner';
 import Foote from './Foote';
 const News = (props) => {
     const [articles, setArticles] = useState([])
+    const [currentpage,setcurrentpage]=useState(1)
     const [loading, setLoading] = useState(true)
-    var url="https://flye-news-app.vercel.app/"
-    let category=props.category;
-    const updateNews = async () => {
-        // console.log(" update new is call ")
+    const [pagechange,setpagechange]=useState(false)
+   
+    
+    const updateNews = async (newcategory) => {
+
+        var url="https://flye-news-app.vercel.app/"
         props.setProgress(3);
-        if(category==="general"){
+         if( newcategory==='business'){
+            url="https://flye-news-app.vercel.app/business"
+        }
+        else if(  newcategory==='entertainment'){
+
+            url="https://flye-news-app.vercel.app/entertainment"
+        }
+       
+      else  if(  newcategory==="general" ){
             // console.log(" if general")
             url=url+"general"
         }
-        else if(props.category==='entertainment'){
-            url="https://flye-news-app.vercel.app/entertainment"
-        }
-        else if(props.category==='business'){
-            url="https://flye-news-app.vercel.app/business"
-        }
-        else if(props.category==='health'){
+       
+        else if(  newcategory==='health'){
             url="https://flye-news-app.vercel.app/health"
         }
-        else if(props.category==='technology'){
-            url="https://flye-news-app.vercel.app/technology"
-        }
-        else if(props.category==='science'){
+       
+        else if(  newcategory==='science' ){
             url="https://flye-news-app.vercel.app/science"
         }
-        else if(props.category==='sport'){
+        else if(  newcategory==='sport'){
             url="https://flye-news-app.vercel.app/sport"
+        }
+        else if(  newcategory==='technology'){
+            url="https://flye-news-app.vercel.app/technology"
         }
         // const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
         setLoading(true)
@@ -47,10 +54,8 @@ const News = (props) => {
         }
         
         props.setProgress(70);
-        // console.log("artifa ",artifa);
-        // first artifa  used when  response is fail
-        // !artifa=read as not data 
         if(!artifa ){   
+            // this data news when request expire or any error 
          let arr= [
             {
             "source": {
@@ -322,19 +327,54 @@ const News = (props) => {
         props.setProgress(100); 
     }
     useEffect(() => {
-        updateNews();
-    }, [category])
+        updateNews(props.category);
+    }, [props.category]) 
+   
+    const handlePrev=()=>{
+        let categoryarr=["business", "entartainment","health","general","science","sport","technology"];
+        var randid=Math.random();
+        var randomIndex=Math.floor(randid*7);
+        setpagechange(true)
+        updateNews(categoryarr[randomIndex]);
+        console.log(randomIndex)
+        setcurrentpage(currentpage-1)
+        
+    }
+    const handleNext=()=>{
+        setpagechange(true)
+        let categoryarr=["business", "entartainment","health","general","science","sport","technology"];
+        var randid=Math.random();
+        var randomIndex=Math.floor(randid*7);
+        updateNews(categoryarr[randomIndex]);
+        console.log(randomIndex)
+        setcurrentpage(currentpage+1)
+        
+        
+    }
+   
+        const reloadPage = () => {
+          window.location.reload();
+        } 
     
+
     return (
         <>
             {loading && <Spinner />}
                 <div className="container" >
+                <div className='pagination' style={{display:'flex',justifyContent:'center',alignContent:'center'}}>
+                        <button disabled={currentpage === 1} className='btn btn-dark' onClick={handlePrev}>PREV</button>
+                        <span style={{color:'white', marginLeft:'20px',marginRight:'20px'}}>{currentpage} of {7}</span>
+                        <button disabled={currentpage === 7} className='btn btn-dark' onClick={handleNext}>NEXT</button>
+                    </div>
                     <div className="row"> 
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>
                                 <NewsItem title={element.title ? element.title : "NO Title is provide for given New"} description={element.description ? element.description : "No description is provide due to unspecifid news, due to unknow source "} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                             </div>
                         })}
+                    </div>
+                    <div style={{display:'flex',justifyContent:'center' ,marginTop:'52px'}}>
+                    <button style={{backgroundColor:'rebeccapurple' ,borderRadius:'10px'}} onClick={reloadPage}>Go To Top</button>
                     </div>
                 </div>
                 <Foote/>

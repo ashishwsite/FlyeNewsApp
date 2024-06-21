@@ -12,20 +12,21 @@ const App = () => {
   // const apiKey = process.env.REACT_APP_NEWS_API
   const [progress, setProgress] = useState(3)
   const [refreshKey, setRefreshKey] = useState(0);
+  const [page,setcurrentpage]=useState();
   return (
     <BrowserRouter key={refreshKey}>
       <NavBar />
-      <LoadingBar height={3} color='#f11946' progress={progress} />
-      <div style={{height:'100px'}}></div>
+      <LoadingBar height={1} color='#f11946' progress={progress} />
+      <div style={{height:'10px'}}></div>
       <Routes>
-       <Route path="/" element={<News category="general" setProgress={setProgress} />} /> 
-       <Route path="/general" element={<News category="general" setProgress={setProgress} />} /> 
-       <Route path="/entertainment" element={<News category="entertainment" setProgress={setProgress} />} /> 
-       <Route path="/business" element={<News category="business" setProgress={setProgress} />} /> 
-       <Route path="/health" element={<News category="health" setProgress={setProgress} />} /> 
-       <Route path="/technology" element={<News category="technology" setProgress={setProgress} />} /> 
-       <Route path="/science" element={<News category="science" setProgress={setProgress} />} /> 
-       <Route path="/sports" element={<News category="sport" setProgress={setProgress} />} /> 
+       <Route path="/" element={<News category="general" setProgress={setProgress} pageno={3} setcurrentpage={setcurrentpage} />} /> 
+       <Route path="/general" element={<News category="general" setProgress={setProgress} pageno={3} setcurrentpage={setcurrentpage} />} /> 
+       <Route path="/entertainment" element={<News category="entertainment" setProgress={setProgress} pageno={2} setcurrentpage={setcurrentpage} />} /> 
+       <Route path="/business" element={<News category="business" setProgress={setProgress} pageno={1} setcurrentpage={setcurrentpage} />} /> 
+       <Route path="/health" element={<News category="health" setProgress={setProgress} pageno={4} setcurrentpage={setcurrentpage} />} /> 
+       <Route path="/technology" element={<News category="technology" setProgress={setProgress} pageno={7} setcurrentpage={setcurrentpage} />} /> 
+       <Route path="/science" element={<News category="science" setProgress={setProgress} />} pageno={5} setcurrentpage={setcurrentpage} /> 
+       <Route path="/sports" element={<News category="sport" setProgress={setProgress} pageno={6} setcurrentpage={setcurrentpage} />} /> 
     </Routes>
     </BrowserRouter >
 
