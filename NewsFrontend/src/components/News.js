@@ -361,17 +361,18 @@ const News = (props) => {
         <>
             {loading && <Spinner />}
                 <div className="container" >
-                <div className='pagination' style={{display:'flex',justifyContent:'center',alignContent:'center'}}>
-                        <button disabled={currentpage === 1} className='btn btn-dark' onClick={handlePrev}>PREV</button>
-                        <span style={{color:'white', marginLeft:'20px',marginRight:'20px'}}>{currentpage} of {7}</span>
-                        <button disabled={currentpage === 7} className='btn btn-dark' onClick={handleNext}>NEXT</button>
-                    </div>
+               
                     <div className="row"> 
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>
                                 <NewsItem title={element.title ? element.title : "NO Title is provide for given New"} description={element.description ? element.description : "No description is provide due to unspecifid news, due to unknow source "} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                             </div>
                         })}
+                    </div>
+                    <div className='pagination' style={{display:'flex',justifyContent:'center',alignContent:'center',marginTop:'100px'}}>
+                        <button disabled={currentpage === 1} className='btn btn-dark' onClick={handlePrev}>PREV</button>
+                        <span style={{color:'white', marginLeft:'20px',marginRight:'20px'}}>{currentpage} of {7}</span>
+                        <button disabled={currentpage === 7} className='btn btn-dark' onClick={handleNext}>NEXT</button>
                     </div>
                     <div style={{display:'flex',justifyContent:'center' ,marginTop:'52px'}}>
                     <button style={{backgroundColor:'rebeccapurple' ,borderRadius:'10px'}} onClick={reloadPage}>Go To Top</button>
