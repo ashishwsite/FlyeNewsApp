@@ -11,9 +11,10 @@ const News = (props) => {
    
     
     const updateNews = async (newcategory) => {
-        var url=`https://newsapi.org/v2/top-headlines?category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
+        // var url=`https://newsapi.org/v2/top-headlines?category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
 
-    //     var url="https://flye-news-app.vercel.app/"
+
+        var url=`https://flye-news-app.vercel.app/${props.category}`
     //     props.setProgress(3);
     //      if( newcategory==='business'){
     //         url="https://flye-news-app.vercel.app/business"

@@ -8,7 +8,7 @@ import LoadingBar from 'react-top-loading-bar'
 
 
 const App = () => {
-  // local run fine 
+  // local run fine : problem identify beacase calling api problem 
   // const apiKey = process.env.REACT_APP_NEWS_API
   const [progress, setProgress] = useState(3)
   const [refreshKey, setRefreshKey] = useState(0);
