@@ -11,35 +11,36 @@ const News = (props) => {
    
     
     const updateNews = async (newcategory) => {
+        var url=`https://newsapi.org/v2/top-headlines?category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
 
-        var url="https://flye-news-app.vercel.app/"
-        props.setProgress(3);
-         if( newcategory==='business'){
-            url="https://flye-news-app.vercel.app/business"
-        }
-        else if(  newcategory==='entertainment'){
+    //     var url="https://flye-news-app.vercel.app/"
+    //     props.setProgress(3);
+    //      if( newcategory==='business'){
+    //         url="https://flye-news-app.vercel.app/business"
+    //     }
+    //     else if(  newcategory==='entertainment'){
 
-            url="https://flye-news-app.vercel.app/entertainment"
-        }
+    //         url="https://flye-news-app.vercel.app/entertainment"
+    //     }
        
-      else  if(  newcategory==="general" ){
-            // console.log(" if general")
-            url=url+"general"
-        }
+    //   else  if(  newcategory==="general" ){
+    //         // console.log(" if general")
+    //         url=url+"general"
+    //     }
        
-        else if(  newcategory==='health'){
-            url="https://flye-news-app.vercel.app/health"
-        }
+    //     else if(  newcategory==='health'){
+    //         url="https://flye-news-app.vercel.app/health"
+    //     }
        
-        else if(  newcategory==='science' ){
-            url="https://flye-news-app.vercel.app/science"
-        }
-        else if(  newcategory==='sport'){
-            url="https://flye-news-app.vercel.app/sport"
-        }
-        else if(  newcategory==='technology'){
-            url="https://flye-news-app.vercel.app/technology"
-        }
+    //     else if(  newcategory==='science' ){
+    //         url="https://flye-news-app.vercel.app/science"
+    //     }
+    //     else if(  newcategory==='sport'){
+    //         url="https://flye-news-app.vercel.app/sport"
+    //     }
+    //     else if(  newcategory==='technology'){
+    //         url="https://flye-news-app.vercel.app/technology"
+    //     }
         // const url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=a0507de64f0c463d9dc01d4c13245062`
         setLoading(true)
         let data = await fetch(url);
@@ -51,9 +52,12 @@ const News = (props) => {
         if(parsedData.status==="ok"){
             // console.log("parse data is correct ")
              artifa=parsedData.articles;
+             // display data output
+            //  console.log(artifa);
         }
         
         props.setProgress(70);
+        // if(artifa.length < 10){// here new api return 0 response so i display store news
         if(!artifa ){   
             // this data news when request expire or any error 
          let arr= [
@@ -327,7 +331,7 @@ const News = (props) => {
         props.setProgress(100); 
     }
     useEffect(() => {
-        updateNews(props.category);
+        updateNews();
     }, [props.category]) 
    
     const handlePrev=()=>{
@@ -361,11 +365,14 @@ const News = (props) => {
         <>
             {loading && <Spinner />}
                 <div className="container" >
-               
                     <div className="row"> 
                         {articles.map((element) => {
+                            if (element.title === '[Removed]') {
+                                // Skip rendering this item
+                                return null;
+                              }
                             return <div className="col-md-4" key={element.url}>
-                                <NewsItem title={element.title ? element.title : "NO Title is provide for given New"} description={element.description ? element.description : "No description is provide due to unspecifid news, due to unknow source "} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+                                <NewsItem title={element.title} description={element.description ? element.description : "No description is provide due to unspecifid news, due to unknow source "} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                             </div>
                         })}
                     </div>
